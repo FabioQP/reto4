@@ -7,15 +7,17 @@ function traerInformacionCategories(){
             console.log(respuestaCategories);
             $("#resultadoCategories").empty();
             pintarRespuestaCategories(respuestaCategories);
+            let input = getElementsById('inputID');
         }
     });
 }
+
 
 function pintarRespuestaCategories(items){
 
     let myTable = "<table border=1>";
 
-    myTable += "<tr><th>Id</th><th>Name</th><th>Description</th><th>Action</th><th>Action</th></tr>";
+    myTable += "<tr><th>Id</th><th>Name</th><th>Description</th><th>Detail Action</th><th>Delete Action</th></tr>";
 
     for(i=0; i<items.length; i++) {
         myTable += "<tr>";
