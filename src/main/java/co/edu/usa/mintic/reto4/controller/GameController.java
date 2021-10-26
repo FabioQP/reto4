@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.usa.mintic.reto4.model.Game;
 import co.edu.usa.mintic.reto4.service.GameService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +42,7 @@ public class GameController {
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Game save(@RequestBody Game game) {
+    public Game save(@Valid @RequestBody Game game) {
         return service.save(game);
     }
 

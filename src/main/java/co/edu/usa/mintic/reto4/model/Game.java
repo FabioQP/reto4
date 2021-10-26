@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.validation.constraints.Size;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -27,6 +29,7 @@ public class Game implements Serializable {
     @GeneratedValue(strategy = IDENTITY)
     private Integer id;
 
+    @Size(max = 45, message = "La longitud del nombre del desarrollador no puede ser mayor a 45 caracteres.")
     private String developer;
     private Integer year;
     private String name;
