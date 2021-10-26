@@ -12,12 +12,11 @@ function traerInformacionCategories(){
     });
 }
 
-
 function pintarRespuestaCategories(items){
 
     let myTable = "<table border=1>";
 
-    myTable += "<tr><th>Id</th><th>Name</th><th>Description</th><th>Detail Action</th><th>Delete Action</th></tr>";
+    myTable += "<tr><th>Id</th><th>Name</th><th>Description</th><th>Action</th><th>Action</th></tr>";
 
     for(i=0; i<items.length; i++) {
         myTable += "<tr>";
@@ -130,7 +129,7 @@ function traerInformacionGames(){
 function pintarRespuestaGames(items){
 
     let myTable = "<table border=1>";
-    
+
     myTable += "<tr><th>Id</th><th>Developer</th><th>Year</th><th>Name</th><th>Description</th><th>Action</th><th>Action</th></tr>";
 
     for(i=0; i<items.length; i++) {
@@ -157,8 +156,8 @@ function guardarInformacionGames(){
         year:$("#yearGame").val(),
         name:$("#nameGame").val(),
         description:$("#descriptionGame").val()
-    };   
-    
+    };
+
     let dataToSend=JSON.stringify(myData);
 
     $.ajax({
@@ -175,7 +174,7 @@ function guardarInformacionGames(){
             $("#nameGame").val("");
             $("#descriptionGame").val("");
             traerInformacionGames();
-            alert("Se ha guardado un Juego.")        
+            alert("Se ha guardado un Juego.")
         }
     });
 }
@@ -187,7 +186,7 @@ function detalleInformacionGames(idGame, developerGame, yearGame, nameGame, desc
         year:$("#yearGame").val(yearGame),
         name:$("#nameGame").val(nameGame),
         description:$("#descriptionGame").val(descriptionGame)
-    };   
+    };
 }
 
 function editarInformacionGames(){
@@ -197,8 +196,8 @@ function editarInformacionGames(){
         year:$("#yearGame").val(),
         name:$("#nameGame").val(),
         description:$("#descriptionGame").val()
-    };   
-    
+    };
+
     let dataToSend=JSON.stringify(myData);
 
     $.ajax({
@@ -215,7 +214,7 @@ function editarInformacionGames(){
             $("#nameGame").val("");
             $("#descriptionGame").val("");
             traerInformacionGames();
-            alert("Se ha actualizado un Juego.")        
+            alert("Se ha actualizado un Juego.")
         }
     });
 }
@@ -230,7 +229,7 @@ function borrarElementoGames(idGame){
         success:function(respuestaGames) {
             $("#resultadoGames").empty();
             traerInformacionGames();
-            alert("Se ha eliminado un Juego.")        
+            alert("Se ha eliminado un Juego.")
         }
     });
 }
@@ -259,7 +258,7 @@ function traerInformacionClients(){
 function pintarRespuestaClients(items){
 
     let myTable = "<table border=1>";
-    
+
     myTable += "<tr><th>Id</th><th>Name</th><th>Email</th><th>Age</th><th>Password</th><th>Action</th><th>Action</th></tr>";
 
     for(i=0; i<items.length; i++) {
@@ -286,8 +285,8 @@ function guardarInformacionClients(){
         email:$("#emailClient").val(),
         age:$("#ageClient").val(),
         password:$("#passwordClient").val()
-    };   
-    
+    };
+
     let dataToSend=JSON.stringify(myData);
 
     $.ajax({
@@ -304,7 +303,7 @@ function guardarInformacionClients(){
             $("#ageClient").val("");
             $("#passwordClient").val("");
             traerInformacionClients();
-            alert("Se ha guardado un Cliente.")        
+            alert("Se ha guardado un Cliente.")
         }
     });
 }
@@ -316,7 +315,7 @@ function detalleInformacionClients(idClient, nameClient, emailClient, ageClient,
         email:$("#emailClient").val(emailClient),
         age:$("#ageClient").val(ageClient),
         password:$("#passwordClient").val(passwordClient)
-    };   
+    };
 }
 
 function editarInformacionClients(){
@@ -326,8 +325,8 @@ function editarInformacionClients(){
         email:$("#emailClient").val(),
         age:$("#ageClient").val(),
         password:$("#passwordClient").val()
-    };   
-    
+    };
+
     let dataToSend=JSON.stringify(myData);
 
     $.ajax({
@@ -344,7 +343,7 @@ function editarInformacionClients(){
             $("#ageClient").val("");
             $("#passwordClient").val("");
             traerInformacionClients();
-            alert("Se ha actualizado un Cliente.")        
+            alert("Se ha actualizado un Cliente.")
         }
     });
 }
@@ -359,7 +358,7 @@ function borrarElementoClients(idClient){
         success:function(respuestaClients) {
             $("#resultadoClients").empty();
             traerInformacionClients();
-            alert("Se ha eliminado un Cliente.")        
+            alert("Se ha eliminado un Cliente.")
         }
     });
 }
@@ -369,16 +368,12 @@ function borrarElementoClients(idClient){
 
 function traerInformacionMessages(){
     $.ajax({
-        url: "http://144.22.232.202/api/Message/all",
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        },        
+        url: "http://localhost:8080/api/Message/all",
         type: "GET",
         datatype: "JSON",
         success: function(respuestaMessages){
-            console.log(respuestaMessages);
             $("#resultadoMessages").empty();
-            pintarRespuestaMessages(respuestaMessages.items);
+            pintarRespuestaMessages(respuestaMessages);
         }
     });
 }
@@ -386,33 +381,33 @@ function traerInformacionMessages(){
 function pintarRespuestaMessages(items){
 
     let myTable = "<table border=1>";
-    
+
     myTable += "<tr><th>Id</th><th>MessageText</th><th>Action</th><th>Action</th></tr>";
 
     for(i=0; i<items.length; i++) {
         myTable += "<tr>";
-        myTable += "<td>" + items[i].id + "</td>";
-        myTable += "<td>" + items[i].messagetext + "</td>";
-        myTable += "<td> <button onclick='detalleInformacionMessages(" + items[i].id + "," + "\"" + items[i].messagetext + "\"" + ")'> Detalle </button></td>";
-        myTable += "<td> <button onclick='borrarElementoMessages(" + items[i].id + ")'> Borrar </button></td>";
+        myTable += "<td>" + items[i].idMessage + "</td>";
+        myTable += "<td>" + items[i].messageText + "</td>";
+        myTable += "<td> <button onclick='detalleInformacionMessages(" + items[i].idMessage + "," + "\"" + items[i].messageText + "\"" + ")'> Detalle </button></td>";
+        myTable += "<td> <button onclick='borrarElementoMessages(" + items[i].idMessage + ")'> Borrar </button></td>";
         myTable += "</tr>";
     }
 
     myTable += "</table>";
     $("#idMessage").prop('disabled', false),
-    $("#resultadoMessages").append(myTable);
+        $("#resultadoMessages").append(myTable);
 }
 
 function guardarInformacionMessages(){
     let myData={
-        id:$("#idMessage").val(),
-        messagetext:$("#messageTextMessage").val()
-    };   
-    
+        idMessage:$("#idMessage").val(),
+        messageText:$("#messageTextMessage").val()
+    };
+
     let dataToSend=JSON.stringify(myData);
 
     $.ajax({
-        url:"http://144.22.232.202/api/Message/save",
+        url:"http://localhost:8080/api/Message/save",
         type:"POST",
         contentType: "application/json",
         data:dataToSend,
@@ -421,28 +416,28 @@ function guardarInformacionMessages(){
             $("#resultadoMessages").empty();
             $("#messageTextMessage").val("");
             traerInformacionMessages();
-            alert("Se ha guardado un Mensaje.")        
+            alert("Se ha guardado un Mensaje.")
         }
     });
 }
 
 function detalleInformacionMessages(idMessage, messageTextMessage){
     let myData={
-        id:$("#idMessage").val(idMessage).prop('disabled', true),
-        messagetext:$("#messageTextMessage").val(messageTextMessage)
-    };   
+        idMessage:$("#idMessage").val(idMessage).prop('disabled', true),
+        messageText:$("#messageTextMessage").val(messageTextMessage)
+    };
 }
 
 function editarInformacionMessages(){
     let myData={
-        id:$("#idMessage").val(),
-        messagetext:$("#messageTextMessage").val()
-    };   
-    
+        idMessage:$("#idMessage").val(),
+        messageText:$("#messageTextMessage").val()
+    };
+
     let dataToSend=JSON.stringify(myData);
 
     $.ajax({
-        url:"http://144.22.232.202/api/Message/",
+        url:"http://localhost:8080/api/Message/update",
         type:"PUT",
         contentType: "application/json",
         data:dataToSend,
@@ -452,28 +447,154 @@ function editarInformacionMessages(){
             $("#idMessage").val("");
             $("#messageTextMessage").val("");
             traerInformacionMessages();
-            alert("Se ha actualizado un Mensaje.")        
+            alert("Se ha actualizado un Mensaje.")
         }
     });
 }
 
 function borrarElementoMessages(idMessage){
-    let myData={
-        id:idMessage
-    };   
-    
-    let dataToSend=JSON.stringify(myData);
 
     $.ajax({
-        url:"http://144.22.232.202/api/Message/",
+        url:"http://localhost:8080/api/Message/" + idMessage,
         type:"DELETE",
         contentType: "application/json",
-        data:dataToSend,
         datatype:"JSON",
         success:function(respuestaMessages) {
             $("#resultadoMessages").empty();
             traerInformacionMessages();
-            alert("Se ha eliminado un Mensaje.")        
+            alert("Se ha eliminado un Mensaje.")
+        }
+    });
+}
+
+
+
+
+
+
+
+function traerInformacionReservations(){
+    $.ajax({
+        url: "http://localhost:8080/api/Reservation/all",
+        type: "GET",
+        datatype: "JSON",
+        success: function(respuestaReservations){
+            $("#resultadoReservations").empty();
+            pintarRespuestaReservations(respuestaReservations);
+        }
+    });
+}
+
+function pintarRespuestaReservations(items){
+
+    let myTable = "<table border=1>";
+
+    myTable += "<tr><th>Id</th><th>startDate</th><th>startDate</th><th>devolutionDate</th><th>status</th><th>score</th><th>Action</th><th>Action</th></tr>";
+
+    for(i=0; i<items.length; i++) {
+        myTable += "<tr>";
+        myTable += "<td>" + items[i].idReservation + "</td>";
+        myTable += "<td>" + items[i].startDate + "</td>";
+        myTable += "<td>" + items[i].devolutionDate + "</td>";
+        myTable += "<td>" + items[i].status + "</td>";
+        myTable += "<td>" + items[i].score + "</td>";
+        myTable += "<td> <button onclick='detalleInformacionReservations("
+            + items[i].idReservation + ","
+            + "\"" + items[i].startDate + "\"" + ","
+            + "\"" + items[i].devolutionDate + "\"" + ","
+            + "\"" + items[i].status + "\"" + ","
+            + items[i].score +
+            ")'> Detalle </button></td>";
+        myTable += "<td> <button onclick='borrarElementoReservations(" + items[i].idReservation + ")'> Borrar </button></td>";
+        myTable += "</tr>";
+    }
+
+    myTable += "</table>";
+    $("#idReservation").prop('disabled', false),
+        $("#resultadoReservations").append(myTable);
+}
+
+function guardarInformacionReservations(){
+    let myData={
+        idReservation:$("#idReservation").val(),
+        startDate:$("#startDateReservation").val(),
+        devolutionDate:$("#devolutionDateReservation").val(),
+        status:$("#statusReservation").val(),
+        score:$("#scoreReservation").val()
+    };
+
+    let dataToSend=JSON.stringify(myData);
+
+    $.ajax({
+        url:"http://localhost:8080/api/Reservation/save",
+        type:"POST",
+        contentType: "application/json",
+        data:dataToSend,
+        datatype:"JSON",
+        success:function(respuestaReservations) {
+            $("#resultadoReservations").empty();
+            $("#idReservation").val("");
+            $("#startDateReservation").val("");
+            $("#devolutionDateReservation").val("");
+            $("#statusReservation").val("");
+            $("#scoreReservation").val("");
+            traerInformacionMessages();
+            alert("Se ha guardado una Reservacion.")
+        }
+    });
+}
+
+function detalleInformacionReservations(idReservation, startDateReservation, devolutionDateReservation, statusReservation, scoreReservation){
+    let myData={
+        idReservation:$("#idReservation").val(idReservation).prop('disabled', true),
+        startDate:$("#startDateReservation").val(startDateReservation),
+        devolutionDate:$("#devolutionDateReservation").val(devolutionDateReservation),
+        status:$("#statusReservation").val(statusReservation),
+        score:$("#scoreReservation").val(scoreReservation)
+    };
+}
+
+function editarInformacionReservations(){
+    let myData={
+        idMessage:$("#ideservation").val(),
+        startDate:$("#startDateReservation").val(),
+        devolutionDate:$("#devolutionDateReservation").val(),
+        status:$("#statusReservation").val(),
+        score:$("#scoreReservation").val()
+    };
+
+    let dataToSend=JSON.stringify(myData);
+
+    $.ajax({
+        url:"http://localhost:8080/api/Reservation/update",
+        type:"PUT",
+        contentType: "application/json",
+        data:dataToSend,
+        datatype:"JSON",
+        success:function(respuestaReservations) {
+            $("#respuestaReservations").empty();
+            $("#idReservation").val("");
+            $("#startDateReservation").val("");
+            $("#devolutionDateReservation").val("");
+            $("#statusReservation").val("");
+            $("#scoreReservation").val("");
+            traerInformacionMessages();
+            alert("Se ha actualizado una Reservacion.")
+        }
+    });
+}
+
+function borrarElementoReservations(idReservation){
+
+    $.ajax({
+        url:"http://localhost:8080/api/Reservation/" + idReservation,
+        type:"DELETE",
+        contentType: "application/json",
+        datatype:"JSON",
+        success:function(respuestaReservations) {
+            $("#resultadoReservations").empty();
+            traerInformacionReservations();
+            alert("Se ha eliminado una Reservacion.")
         }
     });
 }
