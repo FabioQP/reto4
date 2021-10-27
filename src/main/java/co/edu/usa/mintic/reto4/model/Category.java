@@ -2,14 +2,8 @@ package co.edu.usa.mintic.reto4.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -22,8 +16,9 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Integer id;
-
+    @Size(max = 45, message = "La longitud del nombre de la categoria no puede ser mayor a 45 caracteres.")
     private String name;
+    @Size(max = 250, message = "La longitud de la descripcion no puede ser mayor a 250 caracteres.")
     private String description;
 
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "category")

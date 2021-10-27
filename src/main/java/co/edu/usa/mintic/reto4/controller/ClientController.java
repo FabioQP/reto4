@@ -18,7 +18,7 @@ import co.edu.usa.mintic.reto4.model.Category;
 import co.edu.usa.mintic.reto4.model.Client;
 import co.edu.usa.mintic.reto4.service.CategoryService;
 import co.edu.usa.mintic.reto4.service.ClientService;
-
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -43,13 +43,13 @@ public class ClientController {
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client save(@RequestBody Client client) {
+    public Client save(@Valid @RequestBody Client client) {
         return service.save(client);
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client update(@RequestBody Client client) { return service.update(client); }
+    public Client update(@Valid @RequestBody Client client) { return service.update(client); }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

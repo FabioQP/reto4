@@ -3,26 +3,16 @@ package co.edu.usa.mintic.reto4.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
-
-import javax.validation.constraints.Size;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "games")
-@JsonPropertyOrder({ "id", "name", "developer", "year",  "description", "category", "messages", "reservations"})
+@JsonPropertyOrder({"id", "name", "developer", "year", "description", "category", "messages", "reservations"})
 public class Game implements Serializable {
 
     @Id
@@ -32,7 +22,9 @@ public class Game implements Serializable {
     @Size(max = 45, message = "La longitud del nombre del desarrollador no puede ser mayor a 45 caracteres.")
     private String developer;
     private Integer year;
+    @Size(max = 45, message = "La longitud del nombre del juego no puede ser mayor a 45 caracteres.")
     private String name;
+    @Size(max = 250, message = "La longitud de la descripcion no puede ser mayor a 250 caracteres.")
     private String description;
 
     @ManyToOne
