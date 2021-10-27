@@ -1,22 +1,10 @@
 package co.edu.usa.mintic.reto4.controller;
 
-import co.edu.usa.mintic.reto4.model.Client;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-
 import co.edu.usa.mintic.reto4.model.Game;
 import co.edu.usa.mintic.reto4.service.GameService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Game")
-@CrossOrigin(origins = "*",methods = {RequestMethod.PUT,RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE})
+@CrossOrigin(origins = "*", methods = {RequestMethod.PUT, RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
 public class GameController {
 
     @Autowired
@@ -48,10 +36,14 @@ public class GameController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Game update(@RequestBody Game game) { return service.update(game); }
+    public Game update(@Valid @RequestBody Game game) {
+        return service.update(game);
+    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("id") int id) { return service.delete(id); }
+    public boolean delete(@PathVariable("id") int id) {
+        return service.delete(id);
+    }
 }
 
