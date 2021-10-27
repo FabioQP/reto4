@@ -8,6 +8,7 @@ import co.edu.usa.mintic.reto4.model.Message;
 import co.edu.usa.mintic.reto4.model.Reservation;
 import co.edu.usa.mintic.reto4.repository.ReservationRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +35,7 @@ public class ReservationService {
     public Reservation save(Reservation reservation) {
 
         reservation.setStatus("created");
+        reservation.setCreationDate(LocalDate.now());
 
         if(reservation.getIdReservation() == null) {
             return repository.save(reservation);
@@ -58,6 +60,7 @@ public class ReservationService {
                 Reservation existing = result.get();
                 existing.setStatus(Optional.of(reservation.getStatus()).orElse(existing.getStatus()));
                 existing.setScore(Optional.of(reservation.getScore()).orElse(existing.getScore()));
+                existing.setCreationDate(Optional.of(reservation.getCreationDate()).orElse(existing.getCreationDate()));
                 existing.setStartDate(Optional.of(reservation.getStartDate()).orElse(existing.getStartDate()));
                 existing.setDevolutionDate(Optional.of(reservation.getDevolutionDate()).orElse(existing.getDevolutionDate()));
 

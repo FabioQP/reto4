@@ -23,6 +23,7 @@ public class Reservation implements Serializable {
     @GeneratedValue(strategy = IDENTITY)
     private Integer idReservation;
 
+    private LocalDate creationDate;
     private LocalDate startDate;
     private LocalDate devolutionDate;
     private String status;
@@ -54,22 +55,6 @@ public class Reservation implements Serializable {
         this.status = status;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setDevolutionDate(LocalDate devolutionDate) {
-        this.devolutionDate = devolutionDate;
-    }
-
-    public LocalDate getDevolutionDate() {
-        return devolutionDate;
-    }
-
     public Float getScore() {
         return score;
     }
@@ -92,5 +77,29 @@ public class Reservation implements Serializable {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getDevolutionDate() {
+        return devolutionDate;
+    }
+
+    public void setDevolutionDate(LocalDate devolutionDate) {
+        this.devolutionDate = devolutionDate;
     }
 }

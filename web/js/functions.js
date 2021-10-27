@@ -489,17 +489,19 @@ function pintarRespuestaReservations(items){
 
     let myTable = "<table border=1>";
 
-    myTable += "<tr><th>Id</th><th>startDate</th><th>startDate</th><th>devolutionDate</th><th>status</th><th>score</th><th>Action</th><th>Action</th></tr>";
+    myTable += "<tr><th>Id</th><th>creationDate</th><th>startDate</th><th>devolutionDate</th><th>status</th><th>score</th><th>Action</th><th>Action</th></tr>";
 
     for(i=0; i<items.length; i++) {
         myTable += "<tr>";
         myTable += "<td>" + items[i].idReservation + "</td>";
+        myTable += "<td>" + items[i].creationDate + "</td>";
         myTable += "<td>" + items[i].startDate + "</td>";
         myTable += "<td>" + items[i].devolutionDate + "</td>";
         myTable += "<td>" + items[i].status + "</td>";
         myTable += "<td>" + items[i].score + "</td>";
         myTable += "<td> <button onclick='detalleInformacionReservations("
             + items[i].idReservation + ","
+            + "\"" + items[i].creationDate + "\"" + ","
             + "\"" + items[i].startDate + "\"" + ","
             + "\"" + items[i].devolutionDate + "\"" + ","
             + "\"" + items[i].status + "\"" + ","
@@ -517,6 +519,7 @@ function pintarRespuestaReservations(items){
 function guardarInformacionReservations(){
     let myData={
         idReservation:$("#idReservation").val(),
+        creationDate:$("#creationDateReservation").val(),
         startDate:$("#startDateReservation").val(),
         devolutionDate:$("#devolutionDateReservation").val(),
         status:$("#statusReservation").val(),
@@ -534,19 +537,21 @@ function guardarInformacionReservations(){
         success:function(respuestaReservations) {
             $("#resultadoReservations").empty();
             $("#idReservation").val("");
+            $("#creationDateReservation").val("");
             $("#startDateReservation").val("");
             $("#devolutionDateReservation").val("");
             $("#statusReservation").val("");
             $("#scoreReservation").val("");
-            traerInformacionMessages();
+            traerInformacionReservations();
             alert("Se ha guardado una Reservacion.")
         }
     });
 }
 
-function detalleInformacionReservations(idReservation, startDateReservation, devolutionDateReservation, statusReservation, scoreReservation){
+function detalleInformacionReservations(idReservation, creationDateReservation, startDateReservation, devolutionDateReservation, statusReservation, scoreReservation){
     let myData={
         idReservation:$("#idReservation").val(idReservation).prop('disabled', true),
+        creationDate:$("#creationDateReservation").val(creationDateReservation),
         startDate:$("#startDateReservation").val(startDateReservation),
         devolutionDate:$("#devolutionDateReservation").val(devolutionDateReservation),
         status:$("#statusReservation").val(statusReservation),
@@ -557,6 +562,7 @@ function detalleInformacionReservations(idReservation, startDateReservation, dev
 function editarInformacionReservations(){
     let myData={
         idMessage:$("#ideservation").val(),
+        creationDate:$("#creationDateReservation").val(),
         startDate:$("#startDateReservation").val(),
         devolutionDate:$("#devolutionDateReservation").val(),
         status:$("#statusReservation").val(),
@@ -574,11 +580,12 @@ function editarInformacionReservations(){
         success:function(respuestaReservations) {
             $("#respuestaReservations").empty();
             $("#idReservation").val("");
+            $("#creationDateReservation").val("");
             $("#startDateReservation").val("");
             $("#devolutionDateReservation").val("");
             $("#statusReservation").val("");
             $("#scoreReservation").val("");
-            traerInformacionMessages();
+            traerInformacionReservations();
             alert("Se ha actualizado una Reservacion.")
         }
     });
