@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-
+import javax.validation.constraints.Size;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -23,6 +23,7 @@ public class Message implements Serializable {
     @GeneratedValue(strategy = IDENTITY)
     private Integer idMessage;
 
+    @Size(max = 250, message = "La longitud del mensaje no puede ser mayor a 250 caracteres.")
     private String messageText;
 
     @ManyToOne

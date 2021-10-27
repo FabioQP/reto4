@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
+import javax.validation.Valid;
 import co.edu.usa.mintic.reto4.model.Client;
 import co.edu.usa.mintic.reto4.model.Message;
 import co.edu.usa.mintic.reto4.service.ClientService;
@@ -44,13 +44,13 @@ public class MessageController {
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Message save(@RequestBody Message message) {
+    public Message save(@Valid @RequestBody Message message) {
         return service.save(message);
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Message update(@RequestBody Message message) { return service.update(message); }
+    public Message update(@Valid @RequestBody Message message) { return service.update(message); }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
