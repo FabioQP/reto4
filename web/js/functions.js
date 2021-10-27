@@ -30,7 +30,7 @@ function pintarRespuestaCategories(items){
 
     myTable += "</table>";
     $("#idGame").prop('disabled', false),
-    $("#resultadoCategories").append(myTable);
+        $("#resultadoCategories").append(myTable);
 }
 
 function guardarInformacionCategories(){
@@ -146,7 +146,7 @@ function pintarRespuestaGames(items){
 
     myTable += "</table>";
     $("#idGame").prop('disabled', false),
-    $("#resultadoGames").append(myTable);
+        $("#resultadoGames").append(myTable);
 }
 
 function guardarInformacionGames(){
@@ -275,7 +275,7 @@ function pintarRespuestaClients(items){
 
     myTable += "</table>";
     $("#idClient").prop('disabled', false),
-    $("#resultadoClients").append(myTable);
+        $("#resultadoClients").append(myTable);
 }
 
 function guardarInformacionClients(){
@@ -561,7 +561,7 @@ function detalleInformacionReservations(idReservation, creationDateReservation, 
 
 function editarInformacionReservations(){
     let myData={
-        idMessage:$("#ideservation").val(),
+        idReservation:$("#idReservation").val(),
         creationDate:$("#creationDateReservation").val(),
         startDate:$("#startDateReservation").val(),
         devolutionDate:$("#devolutionDateReservation").val(),
