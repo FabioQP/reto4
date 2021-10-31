@@ -1,6 +1,9 @@
 package co.edu.usa.mintic.reto4.controller;
 
+import co.edu.usa.mintic.reto4.dto.ReservationStatus;
+import co.edu.usa.mintic.reto4.model.Client;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +22,7 @@ import co.edu.usa.mintic.reto4.model.Reservation;
 import co.edu.usa.mintic.reto4.service.MessageService;
 import co.edu.usa.mintic.reto4.service.ReservationService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -52,4 +56,24 @@ public class ReservationController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int id) { return service.delete(id); }
+
+    @GetMapping("/report-dates/{startDate}/{endDate}")
+    public Optional<Long> getReportFromDates(@PathVariable("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                             @PathVariable("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+
+
+        return service.getReportFromDates(startDate, endDate);
+    }
+
+    @GetMapping("/report-status")
+    public ReservationStatus getReportStatus() {
+
+        return service.getReportStatus();
+    }
+
+    @GetMapping("/report-clients")
+    public List<Client> getReportClients() {
+
+        return service.getReportClients();
+    }
 }

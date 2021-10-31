@@ -1,6 +1,8 @@
 package co.edu.usa.mintic.reto4.service;
 
+import co.edu.usa.mintic.reto4.dto.ReservationStatus;
 import co.edu.usa.mintic.reto4.model.Category;
+import co.edu.usa.mintic.reto4.model.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +36,6 @@ public class ReservationService {
 
     public Reservation save(Reservation reservation) {
 
-        reservation.setStatus("created");
         reservation.setCreationDate(LocalDate.now());
 
         if(reservation.getIdReservation() == null) {
@@ -78,5 +79,25 @@ public class ReservationService {
 
         repository.deleteById(id);
         return true;
+    }
+
+    public Optional<Long> getReportFromDates(LocalDate startDate, LocalDate endDate) {
+
+        return Optional.of(repository.countReservationByCreationDateIsBetween(startDate, endDate));
+    }
+
+    public ReservationStatus getReportStatus() {
+
+        Long completed = repository.countReservationByStatusIsCompleted();
+        Long cancelled = repository.countReservationByStatusIsCancelled();
+
+        ReservationStatus status = new ReservationStatus(completed, cancelled);
+
+        return status;
+    }
+
+    public List<Client> getReportClients() {
+
+        return repository.getClientsWithReservationsCompleted();
     }
 }
