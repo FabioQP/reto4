@@ -12,8 +12,8 @@ import java.util.List;
 
 public interface ReservationRepository extends CrudRepository<Reservation, Integer> {
 
-    @Query(value = "SELECT COUNT(*) FROM reservations r WHERE creation_date between ?1 and ?2", nativeQuery = true)
-    Long countReservationByCreationDateIsBetween(
+    @Query(value = "SELECT COUNT(*) FROM reservations r WHERE start_date >= ?1 and devolution_date <= ?2", nativeQuery = true)
+    Long countReservationByStartDateAndDevolutionDateAreBetween(
             @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
     @Query(value = "SELECT COUNT(*) FROM reservations r WHERE status LIKE 'completed'", nativeQuery = true)

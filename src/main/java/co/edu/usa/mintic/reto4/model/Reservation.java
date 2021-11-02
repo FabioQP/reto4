@@ -23,7 +23,6 @@ public class Reservation implements Serializable {
     @GeneratedValue(strategy = IDENTITY)
     private Integer idReservation;
 
-    private LocalDate creationDate;
     private LocalDate startDate;
     private LocalDate devolutionDate;
     private String status;
@@ -79,27 +78,23 @@ public class Reservation implements Serializable {
         this.client = client;
     }
 
-    public LocalDate getCreationDate() {
-        return creationDate;
+    public String getStartDate() {
+
+        return startDate.toString().concat("T00:00:00.000+00:00");
     }
 
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
+    public void setStartDate(String startDate) {
+
+        this.startDate = LocalDate.parse(startDate);
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public String getDevolutionDate() {
+
+        return devolutionDate.toString().concat("T00:00:00.000+00:00");
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
+    public void setDevolutionDate(String devolutionDate) {
 
-    public LocalDate getDevolutionDate() {
-        return devolutionDate;
-    }
-
-    public void setDevolutionDate(LocalDate devolutionDate) {
-        this.devolutionDate = devolutionDate;
+        this.devolutionDate = LocalDate.parse(devolutionDate);
     }
 }

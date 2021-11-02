@@ -36,8 +36,6 @@ public class ReservationService {
 
     public Reservation save(Reservation reservation) {
 
-        reservation.setCreationDate(LocalDate.now());
-
         if(reservation.getIdReservation() == null) {
             return repository.save(reservation);
         } else {
@@ -61,7 +59,6 @@ public class ReservationService {
                 Reservation existing = result.get();
                 existing.setStatus(Optional.of(reservation.getStatus()).orElse(existing.getStatus()));
                 existing.setScore(Optional.of(reservation.getScore()).orElse(existing.getScore()));
-                existing.setCreationDate(Optional.of(reservation.getCreationDate()).orElse(existing.getCreationDate()));
                 existing.setStartDate(Optional.of(reservation.getStartDate()).orElse(existing.getStartDate()));
                 existing.setDevolutionDate(Optional.of(reservation.getDevolutionDate()).orElse(existing.getDevolutionDate()));
 
@@ -83,7 +80,7 @@ public class ReservationService {
 
     public Optional<Long> getReportFromDates(LocalDate startDate, LocalDate endDate) {
 
-        return Optional.of(repository.countReservationByCreationDateIsBetween(startDate, endDate));
+        return Optional.of(repository.countReservationByStartDateAndDevolutionDateAreBetween(startDate, endDate));
     }
 
     public ReservationStatus getReportStatus() {
